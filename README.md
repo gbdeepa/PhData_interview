@@ -141,18 +141,18 @@ Postgres cleaned Table :vehicles_deduped_information
 >
 > Transformations completed:
 
-Mileage_range    : provides which range category the Vehicles falls into.
-Generic_fuel_type: provides Gas/Hybrid/Electric Category of Vehicles information.
-Vehicle_status.  : 'semi-new' values are populated based on themileage.
-Avg_miles_by_make: provides avg miles by the make and model of the vehicle.
-Vehicle Seller Table: vehicles_seller_information (6 columns)
-(Generate an additional seller table with the name, address and amount
-of vehicles listed for this particular seller. But only for the
-sellers that list 5 or more vehicles.)
+            Mileage_range    : provides which range category the Vehicles falls into.
+            Generic_fuel_type: provides Gas/Hybrid/Electric Category of Vehicles information.
+            Vehicle_status.  : 'semi-new' values are populated based on themileage.
+            Avg_miles_by_make: provides avg miles by the make and model of the vehicle.
+            Vehicle Seller Table: vehicles_seller_information (6 columns)
+            (Generate an additional seller table with the name, address and amount
+            of vehicles listed for this particular seller. But only for the
+            sellers that list 5 or more vehicles.)
 
 8)  **Final Load:**
 
-Mysql Database:airflow
-Postgres Schema:public
+Mysql Database  :airflow
+Postgres Schema :public
 Postgres target Table:vehicles_info_fact , vehicle_dim, seller_dim
-Audit Columns:insert_date
+Audit Columns   :insert_date
