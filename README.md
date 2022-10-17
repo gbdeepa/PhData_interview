@@ -24,28 +24,28 @@
         4.  Airflow login in UI (localhost:8080)
         5.  Find the Dag name that you have built and run the Tasks.
 
-**Process Flow Diagram**
+## **Process Flow Diagram**
 
 ![](vertopal_27f870cf549848bebbed9c847017d4f9/media/image1.png){width="7.631419510061242in"
 height="3.8097386264216975in"}
 
-**Steps of the Process**
+## **Steps of the Process**
 
 1)  **Source files:**
 
         Type of data            : csv
         Number of columns       : 21
-        Expected arrival        :\<arrival time\>
+        Expected arrival        : <arrival time>
         File location           :/opt/airflow/dags/data/vehicle_challenge.csv
 
 2)  **Preprocess:**
 
-        Code location   :dags/data_pipeline_dag.py
-        Airflow Task    :source_data_check
+        Code location           :dags/data_pipeline_dag.py
+        Airflow Task            :source_data_check
         Checks Completed:
-        Check total number of records : 
+                -  Check total number of records : 
                 If count is equal to zero abort the process and Send Email alert with Zero record message.
-        Column count to check the Layout of the data :
+                -  Column count to check the Layout of the data :
                 If columns of the data file are less or more than expected, Send Email alert.
 
 3)  **Raw Layer:**
@@ -63,8 +63,8 @@ height="3.8097386264216975in"}
 
 4)  **Insert Raw data into Postgres Table:**
 
-        Code location   :dags/data_pipeline_dag.py
-        Airflow Task    :pg_extract_task
+        Code location           :dags/data_pipeline_dag.py
+        Airflow Task            :pg_extract_task
 
 5)  **Check data and build statistics:**
 
@@ -89,8 +89,8 @@ height="3.8097386264216975in"}
         Code location           :dags/sql/deduplicate_data_sql_query.sql
         Airflow Task            :deduplicate_data
         Checks completed:
-                -Removes duplicate vehicles, leaving only the record with the highest mileage
-                -Cast Conversion
+                -  Removes duplicate vehicles, leaving only the record with the highest mileage
+                -  Cast Conversion
 
 7)  **Transformation Layer:**
 
@@ -98,14 +98,13 @@ height="3.8097386264216975in"}
         Airflow Task            :Transformation
         Transformations completed:
 
-            - Mileage_range    : provides which range category the Vehicles falls into.
-            - Generic_fuel_type: provides Gas/Hybrid/Electric Category of Vehicles information.
-            - Vehicle_status.  : 'semi-new' values are populated based on themileage.
-            - Avg_miles_by_make: provides avg miles by the make and model of the vehicle.
-            - Vehicle Seller Table: vehicles_seller_information (6 columns)
-            (Generate an additional seller table with the name, address and amount
-            of vehicles listed for this particular seller. But only for the
-            sellers that list 5 or more vehicles.)
+            -  Mileage_range    : provides which range category the Vehicles falls into.
+            -  Generic_fuel_type: provides Gas/Hybrid/Electric Category of Vehicles information.
+            -  Vehicle_status.  : 'semi-new' values are populated based on themileage.
+            -  Avg_miles_by_make: provides avg miles by the make and model of the vehicle.
+            -  Vehicle Seller Table: vehicles_seller_information (6 columns)
+                    (Generate an additional seller table with the name, address and amount
+                    of vehicles listed for this particular seller. But only for the sellers that list 5 or more vehicles)
 
 8)  **Final Load:**
 
